@@ -1,18 +1,24 @@
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-function Home(props) {
-
-  function test () {
-      const a = 3 + 56
-      console.log(a)
-  }
+function Home({ isLoggedIn }) {
 
   return (
     <>
       <h1 className="mb-4">Willkommen auf der Home-Seite</h1>
-            <h2>Titel: { props.title ? props.title: "Titel nicht vorhanden" }</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
+      {isLoggedIn ? (
+      <>
+          Sie sind erfolgreich eingeloggt! Gehen Sie zum Profil, um Ihre Daten zu verwalten.
+          <br />
+          <Button as={Link} to="/profile" variant="primary">Mein Profil</Button>
+      </>
+      ) : (
+      <>
+          Melden Sie sich an, um Ihr Profil zu erstellen und zu verwalten.
+          <br />
+          <Button as={Link} to="/login" variant="secondary">Anmelden</Button>
+      </>
+      )}
     </>
   );
 }

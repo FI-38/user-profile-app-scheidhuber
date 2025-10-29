@@ -27,7 +27,7 @@ function App() {
       <main>
         <Container className="pt-5">
           <Routes>
-            <Route path="/" element={<Home title="Hallo Welt aus der App.jsx" />} />
+            <Route path="/" element={<Home isLoggedIn={ isLoggedIn } />} />
             <Route path="/kontakt" element={<Contact />} />
             <Route path="/login" element={
               <Login isLoggedIn={isLoggedIn}
