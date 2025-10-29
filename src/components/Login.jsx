@@ -1,7 +1,10 @@
 // src/components/Login.jsx
-import { Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 function Login() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,12 +13,19 @@ function Login() {
     e.target.reset(); // Formular zurücksetzen
     console.log(username);
     console.log(password);
+
+    setMessage(`Eingeloggt als ${username}`);
+    setIsLoggedIn(true);
   };
 
   return (
     <div className="mt-4">
-      <h3>Bitte einloggen</h3>
-      <Form onSubmit={handleSubmit}>
+
+      <h3>{isLoggedIn ? 'Willkommen zurück!' : 'Bitte einloggen'}</h3>
+
+      { message && <Alert variant="success">{message}</Alert> }
+
+      {!isLoggedIn && (<Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Benutzername</Form.Label>
           <Form.Control
@@ -37,7 +47,8 @@ function Login() {
         <Button variant="primary" type="submit">
           Anmelden
         </Button>
-      </Form>
+      </Form>)
+      }
     </div>
   );
 }
