@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
 
-function UserAppNav() {
+function UserAppNav({ isLoggedIn }) {
   return (
     <Navbar fixed="top" expand="lg" className="bg-body-tertiary">
       <Container>
@@ -13,7 +13,11 @@ function UserAppNav() {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Startseite</Nav.Link>
             <Nav.Link as={Link} to="/kontakt">Kontakt</Nav.Link>
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            {!isLoggedIn ?
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              :
+              <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>
