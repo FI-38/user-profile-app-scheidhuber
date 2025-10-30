@@ -17,12 +17,17 @@ function App() {
       setIsLoggedIn(!isLoggedIn);
   };
 
+  const handleLogout = () => {
+      setIsLoggedIn(false);
+      navigate('/');
+  };
+
   return (
     <>
 
       <FakeToggleLoginButton isLoggedIn={isLoggedIn} onToggle={handleToggleLogin} />
 
-      <UserAppNav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <UserAppNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 
       <main>
         <Container className="pt-5">

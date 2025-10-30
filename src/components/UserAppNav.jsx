@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
 
-function UserAppNav({ isLoggedIn }) {
+function UserAppNav({ isLoggedIn, handleLogout }) {
   return (
     <Navbar fixed="top" expand="lg" className="bg-body-tertiary">
       <Container>
@@ -16,7 +16,7 @@ function UserAppNav({ isLoggedIn }) {
             {!isLoggedIn ?
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               :
-              <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             }
           </Nav>
         </Navbar.Collapse>
