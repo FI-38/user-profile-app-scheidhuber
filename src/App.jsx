@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 
 import UserAppNav from './components/UserAppNav';
@@ -8,13 +8,24 @@ import Contact from './components/Contact';
 import Login from "./components/Login";
 import Register from "./components/Register";
 import FakeToggleLoginButton from './components/FakeToggleLoginButton';
-import { useNavigate } from "react-router-dom";
 
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storedUserId = localStorage.getItem('userId');
+
+    if (token && storedUserId) {
+      setIsLoggedIn(true);
+      setUserId(storedUserId);
+    }
+  }, []);
 
   const handleToggleLogin = () => {
       setIsLoggedIn(!isLoggedIn);
