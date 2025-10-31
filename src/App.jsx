@@ -6,12 +6,15 @@ import UserAppNav from './components/UserAppNav';
 import Home from './components/Home';
 import Contact from './components/Contact';
 import Login from "./components/Login";
+import Register from "./components/Register";
 import FakeToggleLoginButton from './components/FakeToggleLoginButton';
+import { useNavigate } from "react-router-dom";
 
 import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggleLogin = () => {
       setIsLoggedIn(!isLoggedIn);
@@ -19,6 +22,8 @@ function App() {
 
   const handleLogout = () => {
       setIsLoggedIn(false);
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
       navigate('/');
   };
 
@@ -38,6 +43,7 @@ function App() {
               <Login isLoggedIn={isLoggedIn}
                      setIsLoggedIn={setIsLoggedIn} />
             }/>
+            <Route path="/register" element={<Register />} />
 
           </Routes>
         </Container>

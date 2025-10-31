@@ -14,7 +14,10 @@ function UserAppNav({ isLoggedIn, handleLogout }) {
             <Nav.Link as={Link} to="/">Startseite</Nav.Link>
             <Nav.Link as={Link} to="/kontakt">Kontakt</Nav.Link>
             {!isLoggedIn ?
-              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <>
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} to="/Register">Register</Nav.Link>
+              </>
               :
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             }
