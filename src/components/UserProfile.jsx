@@ -53,16 +53,34 @@ function UserProfile({ isLoggedIn, userId }) {
     }));
   };
 
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
-    setMessage(`Daten werden gespeichert`);
-    console.log(formData);
-    // Formular zurücksetzen
-    setFormData({
-      firstname: "",
-      surname: "",
-      bio: "",
-    });
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `http://fi38.mshome.net:3001/api/profile`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+      setMessage(response.ok ? "Profil erfolgreich aktualisiert" : data.error);
+    } catch (error) {
+      setMessage("Fehler beim Speichern des Profils");
+    } finally {
+      // Formular zurücksetzen
+      setFormData({
+        firstname: "",
+        surname: "",
+        bio: "",
+      });
+    }
   };
 
   return (
