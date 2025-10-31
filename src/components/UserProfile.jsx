@@ -25,7 +25,12 @@ function UserProfile({ isLoggedIn, userId }) {
     e.preventDefault();
     setMessage(`Daten werden gespeichert`);
     console.log(formData);
-    e.target.reset(); // Formular zurücksetzen
+    //e.target.reset(); // Formular zurücksetzen
+    setFormData({
+        firstname: "",
+        surname: "",
+        bio: "",
+    });
   };
 
   return (
