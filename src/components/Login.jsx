@@ -1,10 +1,11 @@
 // src/components/Login.jsx
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Login({ isLoggedIn, setIsLoggedIn }) {
-
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +25,11 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
         if (response.ok) {
             localStorage.setItem('token', data.token); // Speichert das Token
             localStorage.setItem('userId', data.userId);  // userId speichern
-            setMessage('Erfolgreich eingeloggt!');
+            setMessage('Erfolgreich eingeloggt! Sie werden weitergeleitet.');
             setIsLoggedIn(true);
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         } else {
             setMessage(data.error || 'Login fehlgeschlagen');
         }
