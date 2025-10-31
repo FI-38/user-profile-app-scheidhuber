@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Contact from './components/Contact';
 import Login from "./components/Login";
 import Register from "./components/Register";
+import UserProfile from "./components/UserProfile";
 
 import './App.css';
 
@@ -51,6 +52,7 @@ function App() {
                      setIsLoggedIn={setIsLoggedIn} />
             }/>
             <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<UserProfile isLoggedIn={isLoggedIn} userId={userId} />} />
 
           </Routes>
         </Container>
