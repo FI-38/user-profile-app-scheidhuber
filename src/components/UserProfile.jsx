@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Container from 'react-bootstrap/Container';
-import { Form, Button, Alert } from 'react-bootstrap';
-import Nav from 'react-bootstrap/Nav';
+import Container from "react-bootstrap/Container";
+import { Form, Button, Alert } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
-
 
 function UserProfile({ isLoggedIn, userId }) {
   const [message, setMessage] = useState("");
@@ -12,6 +11,39 @@ function UserProfile({ isLoggedIn, userId }) {
     surname: "",
     bio: "",
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://fi38.mshome.net:3001/api/profile`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setFormData({
+            firstname: data.firstname || "",
+            surname: data.surname || "",
+            bio: data.bio || "",
+          });
+        } else {
+          setMessage(data.error || "Fehler beim Laden des Profils");
+        }
+      } catch (error) {
+        console.log(error);
+        setMessage("Fehler beim Abrufen des Profils");
+      }
+    };
+    // Call async method.
+    fetchProfile();
+  }, [userId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,11 +57,11 @@ function UserProfile({ isLoggedIn, userId }) {
     e.preventDefault();
     setMessage(`Daten werden gespeichert`);
     console.log(formData);
-    //e.target.reset(); // Formular zurücksetzen
+    // Formular zurücksetzen
     setFormData({
-        firstname: "",
-        surname: "",
-        bio: "",
+      firstname: "",
+      surname: "",
+      bio: "",
     });
   };
 
