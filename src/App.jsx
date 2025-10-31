@@ -7,7 +7,6 @@ import Home from './components/Home';
 import Contact from './components/Contact';
 import Login from "./components/Login";
 import Register from "./components/Register";
-import FakeToggleLoginButton from './components/FakeToggleLoginButton';
 
 import './App.css';
 
@@ -40,9 +39,6 @@ function App() {
 
   return (
     <>
-
-      <FakeToggleLoginButton isLoggedIn={isLoggedIn} onToggle={handleToggleLogin} />
-
       <UserAppNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 
       <main>
