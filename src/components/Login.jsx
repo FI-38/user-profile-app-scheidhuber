@@ -13,7 +13,7 @@ function Login({ isLoggedIn, setIsLoggedIn }) {
     const password = e.target.elements.password.value;
 
     try {
-        const response = await fetch(`http://fi38.mshome.net:3001/api/login`, {
+        const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

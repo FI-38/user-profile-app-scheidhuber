@@ -17,7 +17,7 @@ function UserProfile({ isLoggedIn, userId }) {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://fi38.mshome.net:3001/api/profile`,
+          `${import.meta.env.VITE_API_SERVER_URL}/api/profile`,
           {
             method: "GET",
             headers: {
@@ -58,7 +58,7 @@ function UserProfile({ isLoggedIn, userId }) {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `http://fi38.mshome.net:3001/api/profile`,
+        `${import.meta.env.VITE_API_SERVER_URL}/api/profile`,
         {
           method: "PUT",
           headers: {

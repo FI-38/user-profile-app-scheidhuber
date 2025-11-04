@@ -28,7 +28,7 @@ function Register() {
     }
 
     try {
-      const response = await fetch('http://fi38.mshome.net:3001/api/register', {
+      const response = await fetch(`${import.meta.env.VITE_API_SERVER_URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
